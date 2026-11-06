@@ -3,31 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ma premiŠre page HTML, ‚crite avec nano.">
   <title>Ma premiŠre page</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.6;
-      color: #333;
+    /* Couleurs du thŠme clair */
+    :root {
+      --fond: #f7f7f5;
+      --texte: #2b2b2b;
+      --accent: #2563eb;
+      --carte: #ffffff;
+      --bordure: #e2e2e2;
     }
-    h1 { color: #2c3e50; }
-    a { color: #2980b9; }
+
+    /* ThŠme sombre automatique selon le systŠme */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --fond: #16181d;
+        --texte: #e6e6e6;
+        --accent: #60a5fa;
+        --carte: #1f2228;
+        --bordure: #33363d;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      background: var(--fond);
+      color: var(--texte);
+    }
+
+    header, main, footer {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      padding-top: 40px;
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+    }
+
+    a { color: var(--accent); }
+    a:hover, a:focus { text-decoration: none; }
+
+    .carte {
+      background: var(--carte);
+      border: 1px solid var(--bordure);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+
+    button {
+      font: inherit;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+}
+
+    footer {
+      padding: 20px;
+      font-size: 0.9em;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-  <h1>Bonjour le monde !</h1>
-  <p>Ceci est une page HTML basique, ‚crite avec nano.</p>
+  <header>
+    <h1>Bonjour le monde !</h1>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#liste">Liste</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h2>Une liste</h2>
-  <ul>
-    <li>Premier ‚l‚ment</li>
-    <li>DeuxiŠme ‚l‚ment</li>
-    <li>TroisiŠme ‚l‚ment</li>
-  </ul>
+  <main>
+    <section id="accueil" class="carte">
+      <h2>Accueil</h2>
+      <p>Ceci est une page HTML am‚lior‚e, ‚crite avec nano.</p>
+      <button type="button" id="bouton">Clique-moi</button>
+      <p id="message" aria-live="polite"></p>
+    </section>
 
-  <p>Un lien : <a href="https://developer.mozilla.org/fr/">Documentation MDN</a></p>
+    <section id="liste" class="carte">
+      <h2>Une liste</h2>
+      <ul>
+        <li>Premier ‚l‚ment</li>
+        <li>DeuxiŠme ‚l‚ment</li>
+        <li>TroisiŠme ‚l‚ment</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="carte">
+      <h2>Contact</h2>
+      <p>
+        Ressource utile :
+        <a href="https://developer.mozilla.org/fr/" target="_blank" rel="noopener">
+          Documentation MDN
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="annee"></span> Ma premiŠre page</p>
+  </footer>
+
+  <script>
+    // Ann‚e automatique dans le pied de page
+    document.getElementById("annee").textContent = new Date().getFullYear();
+
+    // Compteur de clics sur le bouton
+    let clics = 0;
+    document.getElementById("bouton").addEventListener("click", function () {
+      clics++;
+      document.getElementById("message").textContent =
+        "Tu as cliqu‚ " + clics + " fois.";
+    });
+  </script>
 </body>
 </html>
